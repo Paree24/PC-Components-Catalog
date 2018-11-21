@@ -1,0 +1,173 @@
+Simple SQL Queries to select all data
+_____________________________________
+SELECT * FROM cpu
+SELECT * FROM motherboard
+SELECT * FROM ram
+SELECT * FROM psu
+SELECT * FROM gpu
+SELECT * FROM cabinet
+SELECT * FROM peripherals
+SELECT * FROM storage
+
+Simple SQL Queries to Select based on conditions
+________________________________________________
+
+CPU Queries
+______________
+SELECT * FROM cpu c WHERE c.Brand="Intel" 
+SELECT * FROM cpu c WHERE c.Brand="AMD" 
+
+SELECT * FROM cpu c WHERE c.Cores=2 
+SELECT * FROM cpu c WHERE c.Cores=4
+SELECT * FROM cpu c WHERE c.Cores=6 
+SELECT * FROM cpu c WHERE c.Cores=8 
+SELECT * FROM cpu c where c.Cores>8 
+
+SELECT * FROM cpu c ORDER BY c.Performance DESC 
+SELECT * FROM cpu c WHERE c.Price<= [Price From POST METHOD]
+
+Ex for Above : SELECT * FROM cpu c WHERE c.Price<=20000 
+
+Motherboard Queries
+-----------------------
+SELECT * FROM motherboard WHERE motherboard.Slot=[Slot From POST METHOD]
+Ex for Above : SELECT * FROM motherboard WHERE motherboard.Slot="AM4" 
+
+SELECT * FROM motherboard WHERE motherboard.RAMSlot="DDR2" 
+SELECT * FROM motherboard WHERE motherboard.RAMSlot="DDR3" 
+SELECT * FROM motherboard WHERE motherboard.RAMSlot="DDR4" 
+
+SELECT * FROM motherboard WHERE motherboard.OC='Y' 
+SELECT * FROM motherboard WHERE motherboard.OC='N'  
+SELECT * FROM motherboard WHERE motherboard.Price<= [Price From POST METHOD]
+
+GPU Queries
+------------------
+SELECT * FROM gpu g WHERE g.Brand="Nvidia" 
+SELECT * FROM gpu g WHERE g.Brand="AMD" 
+
+SELECT * FROM gpu g WHERE g.VRAMCapacity="1GB" 
+SELECT * FROM gpu g WHERE g.VRAMCapacity="2 GB" 
+SELECT * FROM gpu g WHERE g.VRAMCapacity="3 GB" 
+SELECT * FROM gpu g WHERE g.VRAMCapacity="4 GB" 
+SELECT * FROM gpu g WHERE g.VRAMCapacity="6 GB" 
+SELECT * FROM gpu g WHERE g.VRAMCapacity="8 GB" 
+SELECT * FROM gpu g WHERE g.VRAMCapacity="11 GB" 
+
+SELECT * FROM gpu g ORDER BY g.Performance DESC 
+
+SELECT * FROM gpu g WHERE g.Price<= [Price From POST METHOD]
+Ex:SELECT * FROM gpu g WHERE g.Price<=20000 
+
+RAM Queries
+-------------
+SELECT * FROM ram WHERE ram.Brand="Corsair"
+SELECT * FROM ram WHERE ram.Brand="Crucial"
+SELECT * FROM ram WHERE ram.Brand="HyperX"
+SELECT * FROM ram WHERE ram.Brand="Kingston"
+SELECT * FROM ram WHERE ram.Brand="Transcend"
+
+SELECT * FROM ram WHERE ram.Size="2 GB"
+SELECT * FROM ram WHERE ram.Size="4 GB" 
+SELECT * FROM ram WHERE ram.Size="8 GB" 
+
+SELECT * FROM ram WHERE ram.RAMSlot="DDR2" 
+SELECT * FROM ram WHERE ram.RAMSlot="DDR3" 
+SELECT * FROM ram WHERE ram.RAMSlot="DDR4"
+
+SELECT * FROM ram r WHERE r.Price<= [Price From POST METHOD]
+
+PSU Queries
+-----------
+SELECT * FROM psu WHERE psu.Manufacturer="Antec"
+SELECT * FROM psu WHERE psu.Manufacturer="Cooler Master" 
+SELECT * FROM psu WHERE psu.Manufacturer="Corsair" 
+SELECT * FROM psu WHERE psu.Manufacturer="Thermaltake" 
+
+SELECT * FROM psu ORDER BY Wattage DESC 
+
+SELECT * FROM psu WHERE psu.Rating="none" 
+SELECT * FROM psu WHERE psu.Rating="80+" 
+SELECT * FROM psu WHERE psu.Rating="80+ Bronze" 
+SELECT * FROM psu WHERE psu.Rating="80+ Gold" 
+
+SELECT * FROM psu p WHERE p.Price<= [Price From POST METHOD]
+
+Cabinet Queries
+__________________
+SELECT * FROM cabinet WHERE cabinet.Brand="Antec" 
+SELECT * FROM cabinet WHERE cabinet.Brand="Corsair" 
+SELECT * FROM cabinet WHERE cabinet.Brand="Cooler Master" 
+SELECT * FROM cabinet WHERE cabinet.Brand="NZXT" 
+SELECT * FROM cabinet WHERE cabinet.Brand="Thermaltake" 
+
+SELECT * FROM cabinet WHERE cabinet.Type="ATX" 
+SELECT * FROM cabinet WHERE cabinet.Type="Mini - ATX" 
+SELECT * FROM cabinet WHERE cabinet.Type="Mini - ITX" 
+SELECT * FROM cabinet WHERE cabinet.Type="Micro - ATX" 
+
+SELECT * FROM cabinet ca WHERE ca.Price<= [Price From POST METHOD]
+
+Storage Queries
+--------------------
+SELECT * FROM storage s WHERE s.Brand="Kingston" 
+SELECT * FROM storage s WHERE s.Brand="Sandisk" 
+SELECT * FROM storage s WHERE s.Brand="WD" 
+SELECT * FROM storage s WHERE s.Brand="Samsung" 
+SELECT * FROM storage s WHERE s.Brand="Seagate" 
+
+SELECT * FROM storage s WHERE s.Type="HDD" 
+SELECT * FROM storage s WHERE s.Type="SSD" 
+
+SELECT * FROM storage s WHERE s.Capacity="120GB" 
+SELECT * FROM storage s WHERE s.Capacity="240GB"
+SELECT * FROM storage s WHERE s.Capacity="250GB"
+SELECT * FROM storage s WHERE s.Capacity="480GB"
+SELECT * FROM storage s WHERE s.Capacity="500GB"
+SELECT * FROM storage s WHERE s.Capacity="1TB" 
+SELECT * FROM storage s WHERE s.Capacity="2TB" 
+SELECT * FROM storage s WHERE s.Capacity="3TB"     
+
+SELECT * FROM storage s WHERE s.Price<= [Price From POST METHOD]
+
+Peripherals Queries
+-------------------
+SELECT * FROM peripherals p WHERE p.Brand="HP"
+SELECT * FROM peripherals p WHERE p.Brand="DELL" 
+SELECT * FROM peripherals p WHERE p.Brand="LOGITECH" 
+SELECT * FROM peripherals p WHERE p.Brand="LG" 
+SELECT * FROM peripherals p WHERE p.Brand="BENQ" 
+SELECT * FROM peripherals p WHERE p.Brand="AMAZON" 
+
+SELECT * FROM peripherals p WHERE p.Type="Monitor" 
+SELECT * FROM peripherals p WHERE p.Type="Keyboard" 
+SELECT * FROM peripherals p WHERE p.Type="Mouse"
+
+SELECT * FROM peripherals pe WHERE pe.Price<= [Price From POST METHOD] 
+
+Complex SQL Queries
+_____________________
+
+SELECT m.Mname 
+FROM motherboard m, cpu c 
+WHERE m.Slot=c.Slot 
+AND c.Cname=[Name from POST METHOD]
+
+Example Input for Above : SELECT m.Mname FROM motherboard m, cpu c WHERE m.Slot=c.Slot AND c.Cname="Ryzen 3 1300X" 
+
+SELECT r.Brand,r.ClockSpeed,r.Size,r.RAMSlot,r.Price 
+FROM motherboard m, ram r 
+WHERE m.RAMSlot=r.RAMSlot 
+AND m.Mname=[Name from POST METHOD]
+
+Example : SELECT r.Brand,r.ClockSpeed,r.Size,r.RAMSlot,r.Price FROM motherboard m, ram r WHERE m.RAMSlot=r.RAMSlot AND m.Slot="AM4" 
+
+SELECT c.Cname,c.Brand,c.Threads,c.Cores,c.Price,c.Performance,c.Performance/c.Price AS 'Performance for price' 
+FROM cpu c  
+ORDER BY `Performance for price`  
+DESC
+
+SELECT g.Gname,g.Brand,g.VRAMType,g.VRAMCapacity,g.Price,g.Performance, g.Performance/g.Price AS 'Performance for price' 
+FROM gpu g 
+ORDER BY `Performance for price` 
+DESC 
