@@ -1,6 +1,6 @@
 # PC-Components-Catalog
 A Database Management System for Computer Components. This project was done for DBMS Lab, 5th Sem, VTU.
-##Abstract
+## Abstract
 This project is basically a database of the PC components and related details. This project will provide an easy way to get details about PC Components . This project provides the complete details of the PC Components and its related information at a single click.
 It also offers the functionalities like:
 •	Insertion and deletion in the database can be done only by the admin.
